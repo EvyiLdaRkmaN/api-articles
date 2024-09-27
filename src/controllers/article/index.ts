@@ -9,7 +9,8 @@ export const getArticles = async (req: Request, res: Response) => {
     const articles = await Article.findAll();
     res.status(200).json(articles);
   } catch (error) {
-    res.status(500).json(error);
+    console.error('Error<getArticles>:', error);
+    handleError(error, res);
   }
 };
 
@@ -17,7 +18,7 @@ export const getArticles = async (req: Request, res: Response) => {
 export const createArticle = async (req: Request, res: Response) => {
   const { id, name, description, price, model } = req.body;
   try {
-    
+
     const article = await Article.create({
       id,
       name,
@@ -28,8 +29,8 @@ export const createArticle = async (req: Request, res: Response) => {
     res.status(201).json(article);
 
   } catch (error) {
-    console.log('error', error);
-    res.status(500).json(error);
+    console.log('Error<createArticle>:', error);
+    handleError(error, res);
   }
 };
 
@@ -61,19 +62,34 @@ export const updateArticle = async (req: Request, res: Response) => {
     res.status(404).json({ message: 'Articulo no encontrado' });
 
   } catch (error) {
-    console.error('error', error);
-    if (error instanceof Error && error.cause === 'Invalid fields') {
-      res.status(400).json({ message: error.message });
-      return;
-    }
-
-    if (error instanceof Error && error.cause === 'validation') {
-      res.status(400).json({ message: error.message });
-      return;
-    }
-
-    res.status(500).json({ message: 'Ocurrio un error inesperado' });
+    console.error('Error<updateArticle>', error);
+    handleError(error, res);
   }
+
 };
+
+
+const handleError = (error: unknown, res: Response) => {
+  if (error instanceof Error && error.cause === 'Invalid fields') {
+    res.status(400).json({ message: error.message });
+    return;
+  }
+
+  if (error instanceof Error && error.cause === 'validation') {
+    res.status(400).json({ message: error.message });
+    return;
+  }
+
+  if (error instanceof ValidationError) {
+    res.status(400).json({ message: (error as Error).message });
+    return;
+  }
+
+  res.status(500).json({ message: 'Ocurrio un error inesperado' });
+};
+
+
+
+
 
 
