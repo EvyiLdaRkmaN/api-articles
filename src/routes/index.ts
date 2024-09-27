@@ -1,10 +1,12 @@
 import { Router, Request, Response } from "express";
-import { createArticle, getArticles, updateArticle } from "@controllers/article";
+import { createArticle, getArticles, getArticlesById, updateArticle } from "@controllers/article";
 
 
 const routeArticles = Router();
 
 routeArticles.get('/', getArticles );
+
+routeArticles.get('/:id', getArticlesById );
 
 routeArticles.post('/', createArticle );
 

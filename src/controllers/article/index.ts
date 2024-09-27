@@ -14,6 +14,21 @@ export const getArticles = async (req: Request, res: Response) => {
   }
 };
 
+export const getArticlesById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const article = await Article.findByPk(id);
+    if (article) {
+      res.status(200).json(article);
+      return;
+    }
+    res.status(404).json({ message: 'Articulo no encontrado' });
+  } catch (error) {
+    console.error('Error<getArticlesById>:', error);
+    handleError(error, res);
+  }
+};
+
 
 export const createArticle = async (req: Request, res: Response) => {
   const { id, name, description, price, model } = req.body;
@@ -87,6 +102,7 @@ const handleError = (error: unknown, res: Response) => {
 
   res.status(500).json({ message: 'Ocurrio un error inesperado' });
 };
+
 
 
 
