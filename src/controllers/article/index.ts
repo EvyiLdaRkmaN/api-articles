@@ -83,6 +83,23 @@ export const updateArticle = async (req: Request, res: Response) => {
 
 };
 
+export const deleteArticle = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const article = await Article.findByPk(id);
+    if (article) {
+      await article.destroy();
+      res.status(204).json();
+      return;
+    }
+    res.status(404).json({ message: 'Articulo no encontrado' });
+  } catch (error) {
+    console.error('Error<deleteArticle>:', error);
+    handleError(error, res);
+  }
+};
+
+
 
 const handleError = (error: unknown, res: Response) => {
   if (error instanceof Error && error.cause === 'Invalid fields') {
@@ -102,10 +119,3 @@ const handleError = (error: unknown, res: Response) => {
 
   res.status(500).json({ message: 'Ocurrio un error inesperado' });
 };
-
-
-
-
-
-
-
