@@ -2,8 +2,6 @@ import Article from '@models/article';
 import { Request, Response } from 'express';
 import { ValidationError } from 'sequelize';
 
-
-
 export const getArticles = async (req: Request, res: Response) => {
   try {
     const articles = await Article.findAll();
@@ -28,7 +26,6 @@ export const getArticlesById = async (req: Request, res: Response) => {
     handleError(error, res);
   }
 };
-
 
 export const createArticle = async (req: Request, res: Response) => {
   const { id, name, description, price, model } = req.body;
@@ -98,8 +95,6 @@ export const deleteArticle = async (req: Request, res: Response) => {
     handleError(error, res);
   }
 };
-
-
 
 const handleError = (error: unknown, res: Response) => {
   if (error instanceof Error && error.cause === 'Invalid fields') {
