@@ -1,0 +1,37 @@
+{
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": {
+          "node": "current"
+        }
+      }
+    ],
+    [
+      "@babel/preset-typescript",
+      {
+        "allowDeclareFields": true
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["."],
+        "alias": {
+          "src": "./src",
+          "@config": "./src/config",
+          "@models": "./src/models",
+          "@controllers": "./src/controllers",
+          "@routes": "./src/routes",
+          "@middleware": "./src/middleware",
+          "@utils": "./src/utils",
+          "@socket": "./src/socket",
+          "@helpers": "./src/helpers"
+        }
+      }
+    ]
+  ]
+}
