@@ -41,6 +41,12 @@ Article.init(
     name: {
       type: DataTypes.STRING(20),
       allowNull: false,
+      validate: {
+        len: {
+          args: [3, 20],
+          msg: 'El nombre debe tener entre 3 y 20 caracteres',
+        },
+      },
       set(value: string) {
         if (this.isNewRecord) {
           this.setDataValue('name', value);
@@ -49,7 +55,16 @@ Article.init(
         }
       },
     },
-    description: DataTypes.STRING(200),
+    description: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      validate: {
+        len: {
+          args: [0, 200],
+          msg: 'La descripción debe tener máximo 200 caracteres',
+        },
+      },
+    },
     price: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
@@ -64,6 +79,12 @@ Article.init(
     model: {
       type: DataTypes.STRING(10),
       allowNull: false,
+      validate: {
+        len: {
+          args: [3, 10],
+          msg: 'El modelo debe tener entre 3 y 10 caracteres',
+        },
+      },
     },
   },
   {
