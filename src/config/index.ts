@@ -9,12 +9,12 @@ require('dotenv').config();
 class Server {
   app: any;
   port: string | number;
-  basePath: string;
+  articlePath: string;
 
   constructor() {
     this.app = express();
     this.port = process.env.PORT || 3000;
-    this.basePath = '/';
+    this.articlePath = '/articles';
 
 
     this.dbConnection();
@@ -48,7 +48,7 @@ class Server {
   }
 
   routes() {
-    this.app.use(this.basePath, routeArticles);
+    this.app.use(this.articlePath, routeArticles);
   }
 
   listen() {
