@@ -10,6 +10,9 @@ const dbhost = process.env.DB_HOST || 'localhost';
 
 
 console.log('password', dbpassword);
+console.log('host', dbhost);
+console.log('user', dbuser);
+console.log('name', dbname);
 
 const db = new Sequelize(dbname, dbuser, dbpassword, {
   host: dbhost,

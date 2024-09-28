@@ -4,17 +4,15 @@ import validateJSON from '@middleware/validateJSON';
 import routeArticles from '@routes/index';
 import db from './db';
 
-require('dotenv').config();
-
 class Server {
   app: any;
   port: string | number;
-  basePath: string;
+  articlePath: string;
 
   constructor() {
     this.app = express();
     this.port = process.env.PORT || 3000;
-    this.basePath = '/';
+    this.articlePath = '/articles';
 
 
     this.dbConnection();
@@ -48,15 +46,15 @@ class Server {
   }
 
   routes() {
-    this.app.use(this.basePath, routeArticles);
+    this.app.use(this.articlePath, routeArticles);
   }
 
   listen() {
     this.app.listen(this.port, () => {
       console.info(
-        'Server running on port: ',
+        'Server running on port:',
         process.env.PORT,
-        'Mode: ',
+        'Mode:',
         process.env.NODE_ENV
       );
     });

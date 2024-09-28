@@ -1,13 +1,18 @@
 import { Router, Request, Response } from "express";
+import { createArticle, deleteArticle, getArticles, getArticlesById, updateArticle } from "@controllers/article";
 
 
 const routeArticles = Router();
 
-// ejemplo de rutas usuarios
-routeArticles.get('/', (req: Request, res: Response) => {
-  const hello = 'Hello World';
-  res.json({ hello });
-});
+routeArticles.get('/', getArticles );
+
+routeArticles.get('/:id', getArticlesById );
+
+routeArticles.post('/', createArticle );
+
+routeArticles.put('/:id', updateArticle);
+
+routeArticles.delete('/:id', deleteArticle);
 
 
 export default routeArticles;
