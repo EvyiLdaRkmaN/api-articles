@@ -42,6 +42,10 @@ export const createArticle = async (req: Request, res: Response) => {
 
   } catch (error) {
     console.log('Error<createArticle>:', error);
+    if (error instanceof ValidationError && error.errors.some(e => e.type === 'unique violation')) {
+      res.status(409).json({ message: 'Llave primaria duplicada' });
+      return;
+    }
     handleError(error, res);
   }
 };

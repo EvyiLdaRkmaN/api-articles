@@ -63,6 +63,11 @@ Article.init(
           args: [0, 200],
           msg: 'La descripción debe tener máximo 200 caracteres',
         },
+        isString(value: any) {
+          if (typeof value !== 'string') {
+            throw new Error('La descripción debe ser una cadena de texto', {cause: 'validation'});
+          }
+        }
       },
     },
     price: {
