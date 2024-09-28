@@ -10,6 +10,9 @@ Este proyecto es una API REST que permite realizar operaciones CRUD (Crear, Leer
 4. `PUT /articles/:id` - Actualiza un artículo existente por su ID.
 5. `DELETE /articles/:id` - Elimina un artículo por su ID.
 
+### Definición de la API
+La documentación de la API se puede visualizar en la ruta [`/api-docs/`](https://speedy-realm-436918-a1.uc.r.appspot.com/api-docs/) del servidor, y está generada utilizando **Swagger UI**.
+
 ## Tecnologías Utilizadas
 
 - **Node.js**: Plataforma para ejecutar el servidor backend.
@@ -75,9 +78,27 @@ Este proyecto es una API REST que permite realizar operaciones CRUD (Crear, Leer
 
   Inicia el servidor utilizando el código compilado.
 
-## Contribuciones
+## Servicio en la Nube (GCP)
 
-1. Realiza un fork del repositorio.
-2. Crea una nueva rama (`git checkout -b nueva-funcionalidad`).
-3. Realiza tus cambios y haz commits descriptivos.
-4. Envía un pull request para revisión.
+### Accesible desde Internet con el siguiente enlace
+
+[API CRUD de Artículos](https://speedy-realm-436918-a1.uc.r.appspot.com/articles/)
+
+
+
+## evidencia de ejecucion
+
+### Get all articles
+![alt text](./evidence/image.png)
+
+### Get article by id
+![alt text](./evidence/image-3.png)
+
+### POST create article
+![alt text](./evidence/image-2.png)
+
+### PUT update article
+![alt text](./evidence/image-4.png)
+
+### DELETE article
+![alt text](./evidence/image-5.png)
