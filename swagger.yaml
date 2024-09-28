@@ -1,0 +1,148 @@
+openapi: 3.0.0
+info:
+  title: API CRUD de Artículos
+  description: API para realizar operaciones CRUD sobre la tabla de artículos.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Servidor local de desarrollo
+
+paths:
+  /articles:
+    get:
+      summary: Obtener todos los artículos
+      description: Devuelve una lista de todos los artículos.
+      responses:
+        '200':
+          description: Lista de artículos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Article'
+    post:
+      summary: Crear un nuevo artículo
+      description: Crea un nuevo artículo en la base de datos.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArticleInput'
+      responses:
+        '201':
+          description: Artículo creado con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+
+  /articles/{id}:
+    get:
+      summary: Obtener un artículo por ID
+      description: Devuelve un artículo según el ID proporcionado.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del artículo
+      responses:
+        '200':
+          description: Artículo encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+        '404':
+          description: Artículo no encontrado
+
+    put:
+      summary: Actualizar un artículo por ID
+      description: Actualiza los datos de un artículo específico según el ID.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del artículo a actualizar
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArticleInput'
+      responses:
+        '200':
+          description: Artículo actualizado con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+        '404':
+          description: Artículo no encontrado
+
+    delete:
+      summary: Eliminar un artículo por ID
+      description: Elimina un artículo específico según el ID.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del artículo a eliminar
+      responses:
+        '204':
+          description: Artículo eliminado con éxito
+        '404':
+          description: Artículo no encontrado
+
+components:
+  schemas:
+    Article:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID del artículo
+          maxLength: 10
+        name:
+          type: string
+          description: Título del artículo
+          maxLength: 20
+        description:
+          type: string
+          description: Contenido o descripción del artículo
+          maxLength: 200
+        price:
+          type: number
+          format: float
+          description: Precio del artículo
+          multipleOf: 0.01
+        model:
+          type: string
+          description: Modelo del artículo
+          maxLength: 10
+      required:
+        - id
+        - name
+        - price
+
+    ArticleInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Título del artículo
+          maxLength: 20
+        description:
+          type: string
+          description: Contenido o descripción del artículo
+          maxLength: 200
+      required:
+        - name
+        - description
