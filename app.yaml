@@ -5,3 +5,4 @@ env_variables:
   DB_NAME: 'store'
   DB_USER: 'root'
   DB_PASSWORD: ']&0&_oGAC.zG07=['
+  INSTANCE_UNIX_SOCKET: '/cloudsql/speedy-realm-436918-a1:us-central1:db-articles'
